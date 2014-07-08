@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 describe User do
+  describe "#first_name" do
+    it { should have_valid(:first_name).when("Craig", "John") }
+    it { should_not have_valid(:first_name).when(nil, "") }
+  end
+
+  describe "#last_name" do
+    it { should have_valid(:last_name).when("D'Amour", "McGinley") }
+    it { should_not have_valid(:last_name).when(nil, "") }
+  end
+
   describe "#password" do
     it { should have_valid(:password).when("abcd1234", "asd^2jk@%#&!!") }
     it { should_not have_valid(:password).when("abcd123", nil, "") }

@@ -15,6 +15,7 @@ feature "user signs up" do
     click_button "Sign Up"
 
     expect(page).to have_content "Welcome to the Fami.ly!"
+    expect(page).to have_content "Sign Out"
   end
 
   scenario "without required information" do
@@ -22,8 +23,11 @@ feature "user signs up" do
 
     click_button "Sign Up"
 
+    expect(page).to have_content "First name can't be blank"
+    expect(page).to have_content "Last name can't be blank"
     expect(page).to have_content "Email can't be blank"
     expect(page).to have_content "Password can't be blank"
+    expect(page).to_not have_content "Sign Out"
   end
 
 end
