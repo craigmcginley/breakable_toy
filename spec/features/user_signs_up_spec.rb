@@ -4,7 +4,7 @@ feature "user signs up" do
 
   scenario "with valid information" do
     visit new_user_registration_path
-    save_and_open_page
+
     fill_in "user_first_name", with: "Craig"
     fill_in "user_last_name", with: "McGinley"
     fill_in "Email", with: "craig@example.com"
