@@ -4,6 +4,10 @@
   <%= devise_error_messages! %>
 
   <div>
+    <%= image_tag current_user.avatar %>
+  </div>
+
+  <div>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
