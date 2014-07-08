@@ -29,6 +29,8 @@ gem 'foundation-rails'
 
 gem 'simple_form'
 
+gem 'carrierwave'
+
 group :development, :test do
   gem 'spring'
   gem 'pry-rails'
