@@ -40,6 +40,7 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda'
   gem 'quiet_assets'
+  gem 'coveralls', require: false
 end
 
 # Use ActiveModel has_secure_password
