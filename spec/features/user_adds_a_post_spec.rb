@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 feature "user adds a post" do
-
-  scenario "with all information" do
+  before(:each) do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
+  end
 
+  scenario "with all information" do
     visit root_path
     click_link "Add a Post"
 
@@ -20,9 +21,6 @@ feature "user adds a post" do
   end
 
   scenario "with all information except description" do
-    user = FactoryGirl.create(:user)
-    sign_in_as(user)
-
     visit new_post_path
 
     post = FactoryGirl.build(:post)
@@ -35,9 +33,6 @@ feature "user adds a post" do
   end
 
   scenario "with a title that's too long" do
-    user = FactoryGirl.create(:user)
-    sign_in_as(user)
-
     visit new_post_path
 
     fill_in "Title", with: 'Test Title' * 100
@@ -49,9 +44,6 @@ feature "user adds a post" do
   end
 
   scenario "with no information" do
-    user = FactoryGirl.create(:user)
-    sign_in_as(user)
-
     visit new_post_path
     click_button "Create Post"
 
