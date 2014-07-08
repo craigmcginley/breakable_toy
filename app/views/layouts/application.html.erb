@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title>Fami.ly</title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -13,6 +13,7 @@
 
   <body>
     <% if user_signed_in? %>
+      <%= link_to "Add a Post", new_post_path %>
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to "Sign In", new_user_session_path %>

@@ -27,6 +27,8 @@ gem 'devise'
 
 gem 'foundation-rails'
 
+gem 'simple_form'
+
 group :development, :test do
   gem 'spring'
   gem 'pry-rails'
