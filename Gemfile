@@ -31,8 +31,11 @@ gem 'simple_form'
 
 gem 'carrierwave'
 
+gem 'fog'
+
 group :development, :test do
   gem 'spring'
+  gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
