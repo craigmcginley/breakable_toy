@@ -1,14 +1,14 @@
 # encoding: utf-8
 
-class AvatarUploader < CarrierWave::Uploader::Base
+class PostImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  process :resize_to_fill => [350,350]
+  process :resize_to_fill => [600,600]
 
   version :thumb do
-    process :resize_to_fill => [50, 50]
+    process :resize_to_fill => [150, 150]
   end
 
   if Rails.env.production? || Rails.env.development?
@@ -16,6 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   else
     storage :file
   end
+
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
