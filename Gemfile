@@ -35,6 +35,8 @@ gem 'mini_magick'
 
 gem 'fog'
 
+gem 'youtube_addy'
+
 group :development, :test do
   gem 'spring'
   gem 'dotenv-rails'

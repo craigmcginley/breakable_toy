@@ -12,7 +12,7 @@ feature "user adds a post" do
 
     post = FactoryGirl.build(:post)
     fill_in "post_title", with: post.title
-    fill_in "Body", with: post.body
+    fill_in "Content", with: post.body
     click_button "Create Post"
 
     expect(page).to have_content("Post created!")
@@ -37,7 +37,7 @@ feature "user adds a post" do
 
     post = FactoryGirl.build(:post)
     fill_in "post_title", with: post.title
-    fill_in "Body", with: post.body
+    fill_in "Content", with: post.body
     attach_file('Picture', File.join(Rails.root, '/spec/fixtures/images/post_photo.jpg'))
     fill_in "Picture Title", with: "Family Pic!"
     click_button "Create Post"
