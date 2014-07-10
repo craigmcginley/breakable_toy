@@ -9,6 +9,18 @@
     <%= f.input :body %>
   </div>
 
+    <%= f.simple_fields_for :post_images do |img_form| %>
+
+      <div>
+        <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
+      </div>
+
+      <div>
+        <%= img_form.input :title, label: 'Picture Title' %>
+      </div>
+
+    <% end %>
+
   <%= f.button :submit %>
 
 <% end %>
