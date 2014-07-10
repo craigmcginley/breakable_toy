@@ -47,6 +47,22 @@ feature "user adds a post" do
     expect(page).to have_content("Family Pic!")
   end
 
+  scenario "with a video" do
+    visit new_post_path
+
+    post = FactoryGirl.build(:post)
+    fill_in "post_title", with: post.title
+    fill_in "Content", with: post.body
+    fill_in "Link to YouTube Video", with: "https://www.youtube.com/watch?v=5NV6Rdv1a3I"
+    fill_in "Video Title", with: "Recital"
+    click_button "Create Post"
+
+    expect(page).to have_content("Post created!")
+    page.should have_css("iframe")
+    expect(page).to have_content("Recital")
+  end
+
+
   scenario "with a title that's too long" do
     visit new_post_path
 
