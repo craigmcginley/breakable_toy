@@ -18,3 +18,14 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
     <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
   </div>
 <% end %>
+
+<h4>Comment</h4>
+<%= simple_form_for [@post, @comment] do |f| %>
+    <%= f.input :body, label: nil %>
+    <%= f.submit %>
+<% end %>
+
+<% @post.comments.order('created_at DESC').each do |comment| %>
+  <%= comment.user.first_name %>
+  <p><%= comment.body %><p>
+<% end %>
