@@ -4,7 +4,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
+  process :resize_to_fill => [350,350]
+
+  version :thumb do
+    process :resize_to_fill => [50, 50]
+  end
 
   if Rails.env.production? || Rails.env.development?
     storage :fog
