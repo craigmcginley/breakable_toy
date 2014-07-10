@@ -2,9 +2,15 @@
 
 <%= simple_form_for @post do |f| %>
 
-    <%= f.input :title %>
+  <%= f.input :family_ids, :as => :check_boxes, label: "Which families would you like to share this post with?" do %>
+    <%= f.collection_check_boxes :family_ids, current_user.families.order(:surname), :id, :surname do |b|
+      b.label { b.check_box + b.text }
+    end %>
+  <% end %>
 
-    <%= f.input :body, label: 'Content' %>
+  <%= f.input :title %>
+
+  <%= f.input :body, label: 'Content' %>
 
   <%= f.simple_fields_for :post_images do |img_form| %>
 
