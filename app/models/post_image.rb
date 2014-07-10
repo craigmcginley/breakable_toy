@@ -4,6 +4,6 @@ class PostImage < ActiveRecord::Base
   belongs_to :post
 
   validates :url, presence: true
-  validates :title, length: { minimum: 2, maximum: 50 }
+  validates :title, allow_blank: true, length: { minimum: 2, maximum: 50 }
   validates :post, presence: true
 end

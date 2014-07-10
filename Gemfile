@@ -31,6 +31,8 @@ gem 'simple_form'
 
 gem 'carrierwave'
 
+gem 'mini_magick'
+
 gem 'fog'
 
 group :development, :test do

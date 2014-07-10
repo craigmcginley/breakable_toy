@@ -9,8 +9,8 @@ describe PostImage do
   end
 
   describe "#title" do
-    it { should have_valid(:title).when("Family Pic 2014", "Craig at Summer Camp!") }
-    it { should_not have_valid(:title).when(nil, "", "Title too Long" * 50) }
+    it { should have_valid(:title).when(nil, "", "Family Pic 2014", "Craig at Summer Camp!") }
+    it { should_not have_valid(:title).when("Title too Long" * 50) }
   end
 
   describe "#url" do

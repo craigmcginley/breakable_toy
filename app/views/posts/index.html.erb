@@ -4,7 +4,10 @@
   <% @posts.each do |post| %>
     <li>
       <h3><%= link_to post.title, post_path(post) %></h3>
-      Posted by: <%= post.user.first_name %>
+      <div><%= image_tag post.user.avatar.thumb %> <%= post.user.first_name %></div>
+      <% post.post_images.each do |img| %>
+        <%= image_tag img.url.thumb %>
+      <% end %>
     </li>
   <% end %>
 </ul>

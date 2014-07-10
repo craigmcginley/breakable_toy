@@ -5,7 +5,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  process :resize_to_fill => [450,450]
+  process :resize_to_fill => [600,600]
 
   version :thumb do
     process :resize_to_fill => [150, 150]

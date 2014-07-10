@@ -1,5 +1,5 @@
 <h1><%= @post.title %></h1>
-By: <%= @post.user.first_name %>
+By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
 
 <div>
   <p><%= @post.body %></p>
