@@ -3,4 +3,6 @@ class Family < ActiveRecord::Base
   has_many :users, through: :family_members
   has_many :family_posts, dependent: :destroy
   has_many :posts, through: :family_posts
+
+  validates :surname, presence: true, length: {minimum: 2, maximum: 60}
 end

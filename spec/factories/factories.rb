@@ -11,4 +11,8 @@ FactoryGirl.define do
     sequence(:title) { |i| "Family Update #{i}"}
     body "Hey everyone! Just wanted to send along an update for this event. Check out this picture!"
   end
+
+  factory :family do
+    sequence(:surname) { |i| "Family#{i}"}
+  end
 end

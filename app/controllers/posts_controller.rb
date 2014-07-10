@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.order('created_at DESC')
+    @posts = current_user.visible_posts.distinct
   end
 
   def show

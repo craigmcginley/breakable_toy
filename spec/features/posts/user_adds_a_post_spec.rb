@@ -4,6 +4,7 @@ feature "user adds a post" do
   before(:each) do
     user = FactoryGirl.create(:user)
     sign_in_as(user)
+    let(:family) = FactoryGirl.create(:family)
   end
 
   scenario "with title and body information" do
@@ -13,6 +14,7 @@ feature "user adds a post" do
     post = FactoryGirl.build(:post)
     fill_in "post_title", with: post.title
     fill_in "Content", with: post.body
+    select 'McGinley', from:
     click_button "Create Post"
 
     expect(page).to have_content("Post created!")
@@ -60,6 +62,18 @@ feature "user adds a post" do
     expect(page).to have_content("Post created!")
     page.should have_css("iframe")
     expect(page).to have_content("Recital")
+  end
+
+  scenario "with no family specified" do
+    visit new_post_path
+
+    post = FactoryGirl.build(:post)
+    fill_in "post_title", with: post.title
+    fill_in "Content", with: post.body
+    click_button "Create Post"
+
+    expect(page).to_not have_content("Post created!")
+    expect(page).to have_content("requires at least one family")
   end
 
 
