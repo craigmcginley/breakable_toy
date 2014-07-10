@@ -1,25 +1,26 @@
 <h1>Add a Post</h1>
 
 <%= simple_form_for @post do |f| %>
-  <div>
+
     <%= f.input :title %>
-  </div>
 
-  <div>
-    <%= f.input :body %>
-  </div>
+    <%= f.input :body, label: 'Content' %>
 
-    <%= f.simple_fields_for :post_images do |img_form| %>
+  <%= f.simple_fields_for :post_images do |img_form| %>
 
-      <div>
-        <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
-      </div>
+    <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
 
-      <div>
-        <%= img_form.input :title, label: 'Picture Title' %>
-      </div>
+    <%= img_form.input :title, label: 'Picture Title' %>
 
-    <% end %>
+  <% end %>
+
+  <%= f.simple_fields_for :post_videos do |vid_form| %>
+
+    <%= vid_form.input :set_url, as: :text, required: false, label: 'Link to YouTube Video' %>
+
+    <%= vid_form.input :title, label: 'Video Title' %>
+
+  <% end %>
 
   <%= f.button :submit %>
 

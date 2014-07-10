@@ -11,14 +11,11 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.post_images.build
+    @post.post_videos.build
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.post_images.each do |img|
-      img.post = @post
-    end
-    @post.user = current_user
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       flash[:notice] = "Post created!"
@@ -32,7 +29,9 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, post_images_attributes: [:title, :url])
+    params.require(:post).permit(:title, :body,
+      post_images_attributes: [:title, :url],
+      post_videos_attributes: [:title, :set_url])
   end
 
 end
