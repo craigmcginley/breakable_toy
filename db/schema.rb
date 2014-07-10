@@ -16,15 +16,6 @@ ActiveRecord::Schema.define(version: 20140710141754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "post_assets", force: true do |t|
-    t.integer  "post_id",    null: false
-    t.string   "type"
-    t.string   "url",        null: false
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "post_images", force: true do |t|
     t.integer  "post_id",    null: false
     t.string   "url",        null: false
