@@ -22,6 +22,7 @@ feature "user adds a post" do
     fill_in "Content", with: post[:body]
     click_button "Create Post"
 
+    expect(Post.count).to eq(1)
     expect(page).to have_content("Post created!")
     expect(page).to have_content(post[:title])
     expect(page).to have_content(post[:user].first_name)
