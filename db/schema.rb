@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140711192159) do
   end
 
   create_table "invitees", force: true do |t|
+    t.string   "name",                           null: false
     t.string   "email",                          null: false
     t.string   "status",     default: "pending", null: false
     t.integer  "family_id",                      null: false

@@ -1,0 +1,22 @@
+<h1>Manage Invites for <%= @family.surname %></h1>
+
+<%= simple_form_for [@family, @invitee] do |f| %>
+
+  <%= f.input :name %>
+
+  <%= f.input :email %>
+
+  <%= f.submit "Invite" %>
+
+<% end %>
+
+
+<ul>
+  <% @invitees.each do |invitee| %>
+    <li>
+      <%= invitee.email %>
+      <%= invitee.family.surname %>
+      <%= invitee.status %>
+    </li>
+  <% end %>
+</ul>
