@@ -17,7 +17,7 @@ class FamiliesController < ApplicationController
 
     if @family.save
       current_user.families << @family
-      flash[:notice] = "Created your Family!"
+      flash[:notice] = "Created your family!"
       redirect_to families_path
     else
       flash.now[:notice] = "Please check the requirements."
