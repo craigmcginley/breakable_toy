@@ -14,9 +14,9 @@ class FamiliesController < ApplicationController
 
   def create
     @family = Family.new(family_params)
+    @family.family_members.build(family: @family, user: current_user, role: "admin")
 
     if @family.save
-      current_user.families << @family
       flash[:notice] = "Created your family!"
       redirect_to families_path
     else
