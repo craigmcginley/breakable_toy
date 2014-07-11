@@ -15,4 +15,14 @@ FactoryGirl.define do
   factory :family do
     sequence(:surname) { |i| "Family#{i}"}
   end
+
+  factory :family_post do
+    family
+    post
+  end
+
+  factory :family_member do
+    family
+    user
+  end
 end

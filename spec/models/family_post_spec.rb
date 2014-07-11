@@ -9,7 +9,7 @@ describe FamilyPost do
   end
 
   it "#post" do
-    post = FactoryGirl.create(:post)
+    post = FactoryGirl.build(:post)
     should have_valid(:post).when(post)
     should_not have_valid(:post).when(nil)
   end

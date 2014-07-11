@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = current_user.visible_posts.distinct
+    if current_user
+      @posts = current_user.visible_posts.distinct
+    end
   end
 
   def show
