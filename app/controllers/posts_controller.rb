@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.order('created_at DESC')
+    if current_user
+      @posts = current_user.visible_posts.distinct
+    end
   end
 
   def show
@@ -13,6 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @post.post_images.build
     @post.post_videos.build
+    @post.families.build
   end
 
   def create
@@ -31,6 +34,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body,
+      :family_ids => [],
       post_images_attributes: [:title, :url],
       post_videos_attributes: [:title, :set_url])
   end
