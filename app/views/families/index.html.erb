@@ -6,7 +6,7 @@
       <%= link_to fam.surname, family_path(fam) %>
     </li>
     <% if current_user.admin_of?(fam) %>
-       | <%= link_to "Manage Invites", family_invitees_path(fam) %>
+      -<%= link_to "Manage Invites for #{fam.surname} Family", family_invitees_path(fam) %>
     <% end %>
   <% end %>
 </ul>

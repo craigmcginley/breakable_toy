@@ -13,6 +13,7 @@ class InviteesController < ApplicationController
     @invitee.family = @family
 
     if @invitee.save
+      Invites.invite(@invitee, current_user).deliver
       flash[:notice] = "Successfully Invited!"
       redirect_to family_invitees_path(@family)
     else

@@ -49,6 +49,8 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'shoulda'
   gem 'quiet_assets'
+  gem 'email_spec'
+  gem 'mailcatcher'
   gem 'coveralls', require: false
 end
 

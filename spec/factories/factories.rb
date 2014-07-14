@@ -25,4 +25,9 @@ FactoryGirl.define do
     family
     user
   end
+
+  factory :invitee do
+    sequence(:name) { |i| "Joe#{i}" }
+    sequence(:email) { |i| "joe#{i}@example.com" }
+  end
 end
