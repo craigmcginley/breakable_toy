@@ -3,33 +3,17 @@ class Invitee < ActiveRecord::Base
   belongs_to :user
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: { scope: "family_id", message: "This invite already exists." }
+  validate :family_member_does_not_exist_already, if: Proc.new { |i| i.family.present? }
   validates :status, presence: true, inclusion: { in: %w(pending joined) }
   validates :family, presence: true
 
-  def make_family_member
-    all_memberships = FamilyMember.all
-    new_member = FamilyMember.new(family: self.family, user: self.user)
-    if !all_memberships.include?(new_member)
-      new_member.save
-      Post.create(user: self.user, title: "#{self.user.first_name} joined the family!")
-    end
-  end
-
-  def already_exists?
-    users_invites = Invitee.where(email: self.email)
-    users_invites.each do |invite|
-      if invite.family == self.family
-        return true
-      end
-    end
-
-    self.family.family_members.each do |member|
+  def family_member_does_not_exist_already
+    family.family_members.each do |member|
       if member.user.email == self.email
-        return true
+        errors.add(:email, "This family member already exists.")
       end
     end
-    return false
   end
 
 end

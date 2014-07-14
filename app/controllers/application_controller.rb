@@ -12,4 +12,20 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << [:first_name, :last_name, :avatar]
   end
 
+  def authorized_for_admin_tools
+    family = Family.find(params[:family_id])
+    family.family_members.each do |member|
+      if member.user == current_user && member.role != "admin"
+        raise ActionController::RoutingError.new('Not Found')
+      end
+    end
+  end
+
+  def correct_user_responding
+    invite = Invitee.find(params[:id])
+    if current_user.email != invite.email
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
 end

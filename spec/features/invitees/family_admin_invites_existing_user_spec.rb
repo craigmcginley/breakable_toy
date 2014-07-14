@@ -44,7 +44,7 @@ feature "user invites a current user to join family" do
     click_button "Invite"
 
     expect(Invitee.count).to eq(0)
-    expect(page).to have_content("That person has already been invited to this family.")
+    expect(page).to have_content("This family member already exists.")
   end
 
 end

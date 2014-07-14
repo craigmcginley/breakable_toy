@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711192159) do
+ActiveRecord::Schema.define(version: 20140714201439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20140711192159) do
     t.datetime "updated_at"
     t.string   "role",       default: "member", null: false
   end
+
+  add_index "family_members", ["user_id", "family_id"], name: "index_family_members_on_user_id_and_family_id", unique: true, using: :btree
 
   create_table "family_posts", force: true do |t|
     t.integer  "family_id",  null: false

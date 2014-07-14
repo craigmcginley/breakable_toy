@@ -7,9 +7,12 @@ Rails.application.routes.draw do
     resources :invitees, only: [:index, :create]
   end
 
-  resources :invitees, only: [:show, :update, :destroy]
 
   resources :posts do
     resources :comments, only: :create
+  end
+
+  resources :users, only: [] do
+    resources :invitees, only: [:index, :update, :destroy], controller: 'user_invitees'
   end
 end
