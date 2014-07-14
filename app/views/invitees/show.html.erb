@@ -1,0 +1,12 @@
+<h1>My Invites</h1>
+
+<ul>
+  <% @invites.each do |invite| %>
+    <li>
+      <%= invite.family.surname %> | <%= invite.status %> |
+      <% if invite.status == "pending" %>
+        <%= link_to "Accept this invitation", invitee_path(invite), method: "PATCH" %> | <%= link_to "Decline this invitation", invitee_path(invite), method: "DELETE" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

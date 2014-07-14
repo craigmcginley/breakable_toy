@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     through: :family_posts,
     source: :post
 
+  has_many :invitees
   has_many :posts
   has_many :comments
 
