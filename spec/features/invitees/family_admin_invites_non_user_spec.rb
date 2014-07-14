@@ -15,7 +15,7 @@ feature "user invites a non-user to join site/family" do
   end
 
   scenario "with valid info" do
-    click_link "Manage Invites"
+    click_link "Manage Invites for #{family.surname} Family"
 
     fill_in "Name", with: "Craig"
     fill_in "Email", with: "craig@example.com"
@@ -26,21 +26,39 @@ feature "user invites a non-user to join site/family" do
     expect(page).to have_content("craig@example.com")
     expect(page).to have_content(family.surname)
     expect(page).to have_content("pending")
+
     expect(ActionMailer::Base.deliveries.count).to eq(1)
     email = ActionMailer::Base.deliveries.last
-
     expect(email).to have_subject("Invitation from #{user.first_name} to join a kinstagram family")
     expect(email).to deliver_to("craig@example.com")
-    expect(email).to have_body_text("#{user.first_name} #{user.last_name} has invited you to join their family group on kinstagram. Register or sign in to accept this invitation.")  end
+    expect(email).to have_body_text("#{user.first_name} #{user.last_name} has invited you to join their family group on kinstagram. Register or sign in to accept this invitation.")
+  end
 
   scenario "without any info" do
-    click_link "Manage Invites"
+    click_link "Manage Invites for #{family.surname} Family"
     click_button "Invite"
+
+
 
     expect(Invitee.count).to eq(0)
     expect(ActionMailer::Base.deliveries.count).to eq(0)
     expect(page).to have_content("Please check the requirements")
     expect(page).to have_content("can't be blank")
+  end
+
+  scenario "with someone who has already been invited" do
+    invitee = FactoryGirl.attributes_for(:invitee)
+    click_link "Manage Invites for #{family.surname} Family"
+    fill_in "Name", with: invitee[:name]
+    fill_in "Email", with: invitee[:email]
+    click_button "Invite"
+
+    fill_in "Name", with: invitee[:name]
+    fill_in "Email", with: invitee[:email]
+    click_button "Invite"
+
+    expect(Invitee.count).to eq(1)
+    expect(page).to have_content("That person has already been invited to this family.")
   end
 
 end

@@ -15,13 +15,10 @@ class InviteesController < ApplicationController
     @invitee = Invitee.new(invitee_params)
     @invitee.status = "pending"
     @invitee.family = @family
-    @users_invitees = Invitee.where(email: @invitee.email)
 
-    @users_invitees.each do |invite|
-      if invite.family == @invitee.family
-        flash[:notice] = "That person has already been invited to this family."
-        redirect_to family_invitees_path(@invitee.family) and return
-      end
+    if @invitee.already_exists?
+      flash[:notice] = "That person has already been invited to this family."
+      redirect_to family_invitees_path(@invitee.family) and return
     end
 
     if @invitee.save
