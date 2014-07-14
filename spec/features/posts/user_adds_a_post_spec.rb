@@ -37,7 +37,6 @@ feature "user adds a post" do
 
     expect(page).to have_content("Post created!")
     expect(page).to have_content(post[:title])
-    expect(page).to have_content(post[:user].first_name)
   end
 
   scenario "with a picture" do
@@ -88,7 +87,6 @@ feature "user adds a post" do
     click_link family2.surname
 
     expect(page).to_not have_content(post[:title])
-    expect(page).to_not have_content(post[:user].first_name)
   end
 
   scenario "where both families can view" do
