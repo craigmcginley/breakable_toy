@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "user signs up" do
 
   scenario "with valid information" do
-    visit root_path
+    visit unauthenticated_root_path
 
     click_link "Sign Up"
 

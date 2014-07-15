@@ -1,4 +1,5 @@
 class UserInviteesController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :correct_user_responding, only: [:update, :destroy]
 
   def index

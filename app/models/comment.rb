@@ -6,3 +6,7 @@ class Comment < ActiveRecord::Base
   validates :post, presence: true
   validates :body, presence: true, length: {minimum: 1, maximum: 1000}
 end
+
+def correct_user_or_admin
+  @comment = current_user.comments.find(params[:id])
+end

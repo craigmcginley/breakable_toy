@@ -1,14 +1,14 @@
 class InviteesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :set_family
   before_filter :authorized_for_admin_tools
 
   def index
-    @family = Family.find(params[:family_id])
     @invitees = @family.invitees
     @invitee = Invitee.new
   end
 
   def create
-    @family = Family.find(params[:family_id])
     @invitee = Invitee.new(invitee_params)
     @invitee.status = "pending"
     @invitee.family = @family
@@ -34,5 +34,9 @@ class InviteesController < ApplicationController
 
   def invitee_params
     params.require(:invitee).permit(:name, :email)
+  end
+
+  def set_family
+    @family = Family.find(params[:family_id])
   end
 end

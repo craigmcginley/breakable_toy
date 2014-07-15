@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'posts#index'
+  devise_scope :user do
+    authenticated :user do
+      root 'posts#index', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root 'devise/registrations#new', as: :unauthenticated_root
+    end
+  end
+
 
   resources :families do
     resources :invitees, only: [:index, :create, :destroy]

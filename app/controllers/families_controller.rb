@@ -1,11 +1,10 @@
 class FamiliesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :set_family, only: [:show, :edit, :update, :destroy]
+  before_filter :authorized_for_admin_tools, only: [:edit, :update, :destroy]
 
   def index
     @families = current_user.families
-  end
-
-  def show
-    @family = Family.find(params[:id])
   end
 
   def new
@@ -25,13 +24,7 @@ class FamiliesController < ApplicationController
     end
   end
 
-  def edit
-    @family = Family.find(params[:id])
-  end
-
   def update
-    @family = Family.find(params[:id])
-
     if @family.update(family_params)
       flash[:notice] = "Successfully updated."
       redirect_to families_path
@@ -42,7 +35,7 @@ class FamiliesController < ApplicationController
   end
 
   def destroy
-    Family.destroy(params[:id])
+    @family.destroy
     flash[:notice] = "Family deleted."
     redirect_to families_path
   end
@@ -51,5 +44,9 @@ class FamiliesController < ApplicationController
 
   def family_params
     params.require(:family).permit(:surname)
+  end
+
+  def set_family
+    @family = Family.find(params[:id])
   end
 end
