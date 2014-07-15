@@ -26,12 +26,13 @@
 <h3>Members</h3>
 <ul>
   <% @family.family_members.each do |member| %>
-    <% if member.role != "admin" %>
       <li>
         <%= member.user.first_name %>
         <%= member.user.email %>
-        <%= link_to "Remove", family_member_path(member), method: "DELETE" %>
+        <% if member.role != "admin" %>
+          <%= link_to "Promote", family_member_path(member), method: "PATCH" %>
+          <%= link_to "Remove", family_member_path(member), method: "DELETE" %>
+        <% end %>
       </li>
-    <% end %>
   <% end %>
 </ul>

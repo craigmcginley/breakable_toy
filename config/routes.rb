@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :invitees, only: [:index, :create, :destroy]
   end
 
-  resources :family_members, only: :destroy
+  resources :family_members, only: [:update, :destroy]
 
   resources :users, only: [] do
     resources :invitees, only: [:index, :update, :destroy], controller: 'user_invitees'
