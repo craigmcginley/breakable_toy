@@ -6,7 +6,17 @@
       <%= link_to fam.surname, family_path(fam) %>
     </li>
     <% if current_user.admin_of?(fam) %>
-      -<%= link_to "Manage Invites for #{fam.surname} Family", family_invitees_path(fam) %>
+      <ul>
+        <li>
+          <%= link_to "Manage Invites for #{fam.surname} Family", family_invitees_path(fam) %>
+        </li>
+        <li>
+          <%= link_to "Edit #{fam.surname} Family", edit_family_path(fam) %>
+        </li>
+        <li>
+          <%= link_to "Delete #{fam.surname} Family", family_path(fam), method: "DELETE" %>
+        </li>
+      </ul>
     <% end %>
   <% end %>
 </ul>

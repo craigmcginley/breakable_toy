@@ -10,6 +10,12 @@ FactoryGirl.define do
     user
     sequence(:title) { |i| "Family Update #{i}"}
     body "Hey everyone! Just wanted to send along an update for this event. Check out this picture!"
+
+    factory :post_with_family do
+      after(:build) do |post|
+        post.families << FactoryGirl.create(:family)
+      end
+    end
   end
 
   factory :family do
@@ -24,10 +30,12 @@ FactoryGirl.define do
   factory :family_member do
     family
     user
+    role "member"
   end
 
   factory :invitee do
     sequence(:name) { |i| "Joe#{i}" }
     sequence(:email) { |i| "joe#{i}@example.com" }
   end
+
 end
