@@ -1,3 +1,5 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
   factory :user do
     first_name 'John'
@@ -16,6 +18,16 @@ FactoryGirl.define do
         post.families << FactoryGirl.create(:family)
       end
     end
+  end
+
+  factory :post_image do
+    post
+    url { fixture_file_upload (File.join(Rails.root, '/spec/fixtures/images/post_photo.jpg')) }
+  end
+
+  factory :post_video do
+    post
+    url "5NV6Rdv1a3I"
   end
 
   factory :comment do

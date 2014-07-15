@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:edit, :update, :destroy]
+  resources :post_images, only: :destroy
+  resources :post_videos, only: :destroy
 
   resources :users, only: [] do
     resources :invitees, only: [:index, :update, :destroy], controller: 'user_invitees'

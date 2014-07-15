@@ -1,4 +1,20 @@
-<h1>Add a Post</h1>
+<h1>Edit Post</h1>
+
+<% @post.post_images.each do |img| %>
+  <div>
+    <%= img.title %>
+    <%= image_tag img.url %>
+    <%= link_to "Delete", post_image_path(img), method: "DELETE" %>
+  </div>
+<% end %>
+
+<% @post.post_videos.each do |vid| %>
+  <div>
+    <%= vid.title %>
+    <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
+  </div>
+  <%= link_to "Delete", post_video_path(vid), method: "DELETE" %>
+<% end %>
 
 <%= simple_form_for @post do |f| %>
 
