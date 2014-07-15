@@ -24,6 +24,12 @@ class InviteesController < ApplicationController
     end
   end
 
+  def destroy
+    Invitee.destroy(params[:id])
+    flash[:notice] = "Successfully removed invitation."
+    redirect_to family_invitees_path
+  end
+
   private
 
   def invitee_params

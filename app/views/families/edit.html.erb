@@ -1,0 +1,9 @@
+<h1>Edit <%= @family.surname %> Family</h1>
+
+<%= simple_form_for @family do |f| %>
+
+  <%= f.input :surname %>
+
+  <%= f.submit %>
+
+<% end %>

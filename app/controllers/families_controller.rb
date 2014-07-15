@@ -25,6 +25,28 @@ class FamiliesController < ApplicationController
     end
   end
 
+  def edit
+    @family = Family.find(params[:id])
+  end
+
+  def update
+    @family = Family.find(params[:id])
+
+    if @family.update(family_params)
+      flash[:notice] = "Successfully updated."
+      redirect_to families_path
+    else
+      flash.now[:notice] = "Please check the requirements."
+      render :edit
+    end
+  end
+
+  def destroy
+    Family.destroy(params[:id])
+    flash[:notice] = "Family deleted."
+    redirect_to families_path
+  end
+
   private
 
   def family_params

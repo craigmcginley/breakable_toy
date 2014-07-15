@@ -22,10 +22,12 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
 <h4>Comment</h4>
 <%= simple_form_for [@post, @comment] do |f| %>
     <%= f.input :body, label: nil %>
-    <%= f.submit %>
+    <%= f.submit "Comment" %>
 <% end %>
 
 <% @post.comments.order('created_at DESC').each do |comment| %>
   <%= comment.user.first_name %>
   <p><%= comment.body %><p>
+  <%= link_to "Edit", edit_comment_path(comment) %>
+  <%= link_to "Delete", comment_path(comment), method: "DELETE" %>
 <% end %>
