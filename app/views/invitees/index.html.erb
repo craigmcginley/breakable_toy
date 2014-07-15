@@ -17,6 +17,7 @@
       <%= invitee.email %>
       <%= invitee.family.surname %>
       <%= invitee.status %>
+      <%= link_to "Remove", family_invitee_path(@family, invitee), method: "DELETE" %>
     </li>
   <% end %>
 </ul>
