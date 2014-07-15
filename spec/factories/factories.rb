@@ -18,6 +18,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :comment do
+    body "Awesome post! Radical!"
+    post
+    user
+  end
+
   factory :family do
     sequence(:surname) { |i| "Family#{i}"}
   end
