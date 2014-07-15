@@ -1,4 +1,4 @@
-<h1>Manage Invites for <%= @family.surname %> Family</h1>
+<h1>Manage Invites and Members for <%= @family.surname %> Family</h1>
 
 <%= simple_form_for [@family, @invitee] do |f| %>
 
@@ -10,14 +10,28 @@
 
 <% end %>
 
-
+<h3>Invites</h3>
 <ul>
   <% @invitees.each do |invitee| %>
-    <li>
-      <%= invitee.email %>
-      <%= invitee.family.surname %>
-      <%= invitee.status %>
-      <%= link_to "Remove", family_invitee_path(@family, invitee), method: "DELETE" %>
-    </li>
+    <% if invitee.status == "pending" %>
+      <li>
+        <%= invitee.email %>
+        <%= invitee.status %>
+        <%= link_to "Remove", family_invitee_path(@family, invitee), method: "DELETE" %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h3>Members</h3>
+<ul>
+  <% @family.family_members.each do |member| %>
+    <% if member.role != "admin" %>
+      <li>
+        <%= member.user.first_name %>
+        <%= member.user.email %>
+        <%= link_to "Remove", family_member_path(member), method: "DELETE" %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
