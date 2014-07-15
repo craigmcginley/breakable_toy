@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = current_user.comments.find(params[:id])
+    correct_user_or_admin(current_user)
   end
 
   def update
@@ -32,11 +32,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    post = comment.post
-    comment.destroy
+    correct_user_or_admin(current_user)
+    @post = @comment.post
+    @comment.destroy
     flash[:notice] = "Comment deleted."
-    redirect_to post_path(post)
+    redirect_to post_path(@post)
   end
 
   private
