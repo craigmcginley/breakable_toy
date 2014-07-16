@@ -11,14 +11,13 @@
   <%= f.input :title %>
 
   <%= f.input :body, label: 'Content' %>
+  <div class="nested-fields">
+    <%= f.simple_fields_for :post_images do |img_form| %>
+      <%= render 'post_image_fields', f: img_form %>
 
-  <%= f.simple_fields_for :post_images do |img_form| %>
-
-    <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
-
-    <%= img_form.input :title, label: 'Picture Title' %>
-
-  <% end %>
+      <%= link_to_add_association 'Add Another Picture', f, :post_images %>
+    <% end %>
+  </div>
 
   <%= f.simple_fields_for :post_videos do |vid_form| %>
 
