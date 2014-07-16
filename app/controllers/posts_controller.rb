@@ -32,11 +32,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
 
     if @post.update(post_params)
       flash[:notice] = "Successfully updated."
@@ -48,7 +48,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.destroy(params[:id])
+    @post = Post.find_for_user_or_admin(params[:id], current_user) || not_found
+    @post.destroy
     flash[:notice] = "Post deleted."
     redirect_to posts_path
   end

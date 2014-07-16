@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   end
 
   def deletable_comment?(comment)
+    if comment.user == self
+      return true
+    end
     family_members.each do |membership|
       comment.post.families.each do |family|
         if family == membership.family && membership.role == "admin"
@@ -41,6 +44,21 @@ class User < ActiveRecord::Base
     end
     return false
   end
+
+  def deletable_post?(post)
+    if post.user == self
+      return true
+    end
+    family_members.each do |membership|
+      post.families.each do |family|
+        if family == membership.family && membership.role == "admin"
+          return true
+        end
+      end
+    end
+    return false
+  end
+
 
   def admin_of?(family)
     family_members.each do |membership|

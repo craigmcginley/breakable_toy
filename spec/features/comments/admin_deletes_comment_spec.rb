@@ -21,4 +21,5 @@ feature "admin deletes a comment" do
     expect(page).to have_content("Comment deleted.")
     expect(page).to_not have_content(comment.body)
   end
+
 end
