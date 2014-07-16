@@ -11,6 +11,8 @@ class FamilyMembersController < ApplicationController
   end
 
   def destroy
+    invite = Invitee.find_by(email: @member.user.email, family: @family)
+    invite.destroy
     @member.destroy
     flash[:notice] = "Family member removed."
     redirect_to family_invitees_path(@family)
