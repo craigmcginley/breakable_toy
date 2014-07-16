@@ -49,5 +49,4 @@ class User < ActiveRecord::Base
     end
     invites
   end
-
 end

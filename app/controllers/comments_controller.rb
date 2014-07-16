@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    # @comment = current_user.editable_comments.find(params[:id])
     correct_user_or_admin(current_user)
   end
 
@@ -32,7 +33,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    correct_user_or_admin(current_user)
+    @comment = Comment.find_for_user_or_admin(params[:id], current_user) || not_found
     @post = @comment.post
     @comment.destroy
     flash[:notice] = "Comment deleted."
