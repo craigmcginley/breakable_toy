@@ -39,6 +39,11 @@ gem 'youtube_addy'
 
 gem 'cocoon'
 
+group :production do
+  gem 'unicorn'
+  gem 'rails_12factor'
+end
+
 group :development, :test do
   gem 'spring'
   gem 'dotenv-rails'
