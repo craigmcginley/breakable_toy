@@ -8,7 +8,7 @@ feature "user creates a family" do
   end
 
   scenario "with valid info" do
-    visit root_path
+    visit authenticated_root_path
     click_link "Create a Family"
 
     fill_in "Surname", with: "McGinley"

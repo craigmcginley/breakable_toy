@@ -28,4 +28,5 @@ describe User do
     it { should_not have_valid(:email).when("fkjdas", "example.com", "craig@", nil, "") }
     it { should validate_uniqueness_of(:email) }
   end
+
 end

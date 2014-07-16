@@ -1,19 +1,26 @@
 class FamilyMembersController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :set_family
+  before_filter :authorized_for_admin_tools
 
   def update
-    member = FamilyMember.find(params[:id])
-    member.role = "admin"
-    member.save
+    @member.role = "admin"
+    @member.save
     flash[:notice] = "Family member promoted!"
-    redirect_to family_invitees_path(member.family)
+    redirect_to family_invitees_path(@family)
   end
 
   def destroy
-    member = FamilyMember.find(params[:id])
-    family = member.family
-    member.destroy
+    @member.destroy
     flash[:notice] = "Family member removed."
-    redirect_to family_invitees_path(family)
+    redirect_to family_invitees_path(@family)
+  end
+
+  private
+
+  def set_family
+    @member = FamilyMember.find(params[:id])
+    @family = @member.family
   end
 
 end

@@ -18,4 +18,20 @@ class Post < ActiveRecord::Base
       errors.add(:family_ids, "requires at least one family")
     end
   end
+
+  def self.find_for_user_or_admin(id, current_user)
+    admin_for = FamilyMember.where(user: current_user, role: "admin")
+
+    if admin_for.empty?
+      current_user.posts.find_by(id: id)
+    else
+      post = Post.find_by(id: id)
+      admin_for.each do |member|
+        if post.user.families.include?(member.family)
+          return post
+        end
+      end
+      nil
+    end
+  end
 end

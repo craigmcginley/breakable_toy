@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  helper_method :correct_user
 
   protected
 
@@ -13,10 +14,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized_for_admin_tools
-    family = Family.find(params[:family_id])
-    family.family_members.each do |member|
+    @family.family_members.each do |member|
       if member.user == current_user && member.role != "admin"
-        raise ActionController::RoutingError.new('Not Found')
+        not_found
       end
     end
   end
@@ -24,8 +24,11 @@ class ApplicationController < ActionController::Base
   def correct_user_responding
     invite = Invitee.find(params[:id])
     if current_user.email != invite.email
-      raise ActionController::RoutingError.new('Not Found')
+      not_found
     end
   end
 
+  def not_found
+    raise ActionController::RoutingError.new("Not Found")
+  end
 end

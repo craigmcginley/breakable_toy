@@ -13,8 +13,7 @@ feature "user deletes a post video" do
   end
 
   scenario "successfully" do
-    visit posts_path
-    click_link "Edit"
+    visit edit_post_path(post)
 
     click_link "Delete"
 

@@ -19,7 +19,7 @@ feature "user views index" do
   end
 
   scenario "sees list of posts" do
-    visit root_path
+    visit authenticated_root_path
 
     posts.each do |post|
       expect(page).to have_content(post[:title])

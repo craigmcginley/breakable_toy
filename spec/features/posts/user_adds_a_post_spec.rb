@@ -14,7 +14,7 @@ feature "user adds a post" do
   end
 
   scenario "with title and body information" do
-    visit root_path
+    visit authenticated_root_path
     click_link "Add a Post"
 
     check(family1.surname)

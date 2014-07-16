@@ -5,7 +5,7 @@ feature "user signs in" do
   scenario "with valid credentials" do
     user = FactoryGirl.create(:user)
 
-    visit root_path
+    visit unauthenticated_root_path
     click_link "Sign In"
 
     fill_in "Email", with: user.email

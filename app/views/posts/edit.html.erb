@@ -4,7 +4,7 @@
   <div>
     <%= img.title %>
     <%= image_tag img.url %>
-    <%= link_to "Delete", post_image_path(img), method: "DELETE" %>
+    <%= link_to "Delete", post_image_path(img), method: :delete, data: {confirm: "Are you sure?" } %>
   </div>
 <% end %>
 
@@ -13,7 +13,7 @@
     <%= vid.title %>
     <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
   </div>
-  <%= link_to "Delete", post_video_path(vid), method: "DELETE" %>
+  <%= link_to "Delete", post_video_path(vid), method: :delete, data: {confirm: "Are you sure?" } %>
 <% end %>
 
 <%= simple_form_for @post do |f| %>
@@ -48,4 +48,4 @@
 
 <% end %>
 
-<%= link_to "Delete This Post", post_path(@post), method: "DELETE" %>
+<%= link_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure?" } %>

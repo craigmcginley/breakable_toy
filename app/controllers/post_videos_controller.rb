@@ -1,4 +1,5 @@
 class PostVideosController < ApplicationController
+  before_filter :authenticate_user!
 
   def destroy
     post_video = PostVideo.find(params[:id])

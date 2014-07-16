@@ -1,6 +1,10 @@
 <h1><%= @post.title %></h1>
 By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
-
+<% if @post.user == current_user %>
+  <div>
+    <%= link_to "Edit", edit_post_path(@post) %>
+  </div>
+<% end %>
 <div>
   <p><%= @post.body %></p>
 </div>
@@ -26,8 +30,14 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
 <% end %>
 
 <% @post.comments.order('created_at DESC').each do |comment| %>
-  <%= comment.user.first_name %>
-  <p><%= comment.body %><p>
-  <%= link_to "Edit", edit_comment_path(comment) %>
-  <%= link_to "Delete", comment_path(comment), method: "DELETE" %>
+  <div class="comment">
+    <%= comment.user.first_name %>
+    <p><%= comment.body %></p>
+    <% if comment.user == current_user %>
+      <%= link_to "Edit", edit_comment_path(comment) %>
+    <% end %>
+    <% if current_user.deletable_comment?(comment) %>
+      <%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
 <% end %>

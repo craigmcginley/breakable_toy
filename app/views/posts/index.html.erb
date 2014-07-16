@@ -16,9 +16,11 @@
             <%= image_tag img.url.thumb %>
           </div>
         <% end %>
-        <div>
-          <%= link_to "Edit", edit_post_path(post) %>
-        </div>
+        <% if current_user.deletable_post?(post) %>
+          <div>
+            <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?" } %>
+          </div>
+        <% end %>
         <div>
           <% post.comments.order('created_at DESC').limit(3).each do |comment| %>
             <%= comment.user.first_name %>:

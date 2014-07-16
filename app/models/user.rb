@@ -19,17 +19,34 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def family_admin_for
-    fams = []
-    families.each do |family|
-      family.family_members.each do |membership|
-        if membership.user == self && membership.role == "admin"
-          fams << family
+  def deletable_comment?(comment)
+    if comment.user == self
+      return true
+    end
+    family_members.each do |membership|
+      comment.post.families.each do |family|
+        if family == membership.family && membership.role == "admin"
+          return true
         end
       end
     end
-    fams.sort_by { |fam| fam.surname }
+    return false
   end
+
+  def deletable_post?(post)
+    if post.user == self
+      return true
+    end
+    family_members.each do |membership|
+      post.families.each do |family|
+        if family == membership.family && membership.role == "admin"
+          return true
+        end
+      end
+    end
+    return false
+  end
+
 
   def admin_of?(family)
     family_members.each do |membership|
@@ -49,5 +66,4 @@ class User < ActiveRecord::Base
     end
     invites
   end
-
 end
