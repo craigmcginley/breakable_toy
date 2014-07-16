@@ -17,7 +17,7 @@
       <li>
         <%= invitee.email %>
         <%= invitee.status %>
-        <%= link_to "Remove", family_invitee_path(@family, invitee), method: "DELETE" %>
+        <%= link_to "Remove", family_invitee_path(@family, invitee), method: :delete, data: {confirm: "Are you sure?" } %>
       </li>
     <% end %>
   <% end %>
@@ -30,8 +30,8 @@
         <%= member.user.first_name %>
         <%= member.user.email %>
         <% if member.role != "admin" %>
-          <%= link_to "Promote", family_member_path(member), method: "PATCH" %>
-          <%= link_to "Remove", family_member_path(member), method: "DELETE" %>
+          <%= link_to "Promote", family_member_path(member), method: :patch, data: {confirm: "Are you sure?" } %>
+          <%= link_to "Remove", family_member_path(member), method: :delete, data: {confirm: "Are you sure?" } %>
         <% end %>
       </li>
   <% end %>

@@ -37,7 +37,7 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
       <%= link_to "Edit", edit_comment_path(comment) %>
     <% end %>
     <% if current_user.deletable_comment?(comment) %>
-      <%= link_to "Delete", comment_path(comment), method: "DELETE" %>
+      <%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure?" } %>
     <% end %>
   </div>
 <% end %>

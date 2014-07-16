@@ -18,7 +18,7 @@
         <% end %>
         <% if current_user.deletable_post?(post) %>
           <div>
-            <%= link_to "Delete", post_path(post), method: "DELETE" %>
+            <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?" } %>
           </div>
         <% end %>
         <div>

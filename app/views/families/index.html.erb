@@ -14,7 +14,7 @@
           <%= link_to "Edit #{fam.surname} Family", edit_family_path(fam) %>
         </li>
         <li>
-          <%= link_to "Delete #{fam.surname} Family", family_path(fam), method: "DELETE" %>
+          <%= link_to "Delete #{fam.surname} Family", family_path(fam), method: :delete, data: {confirm: "Are you sure?" } %>
         </li>
       </ul>
     <% end %>

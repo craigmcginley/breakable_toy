@@ -5,7 +5,7 @@
     <li>
       <%= invite.family.surname %> | <%= invite.status %> |
       <% if invite.status == "pending" %>
-        <%= link_to "Accept", user_invitee_path(current_user, invite), method: "PATCH" %> | <%= link_to "Decline", user_invitee_path(current_user, invite), method: "DELETE" %>
+        <%= link_to "Accept", user_invitee_path(current_user, invite), method: :patch %> | <%= link_to "Decline", user_invitee_path(current_user, invite), method: :delete, data: {confirm: "Are you sure?" } %>
       <% end %>
     </li>
   <% end %>
