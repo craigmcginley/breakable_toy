@@ -37,6 +37,8 @@ gem 'fog'
 
 gem 'youtube_addy'
 
+gem 'cocoon'
+
 group :development, :test do
   gem 'spring'
   gem 'dotenv-rails'
