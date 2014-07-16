@@ -54,25 +54,6 @@ feature "user adds a post" do
     expect(page).to have_content("Family Pic!")
   end
 
-  scenario "with multiple pictures" do
-    visit new_post_path
-    click_link "Add Another Picture"
-    save_and_open_page
-    pics = page.all(".post_image")
-    check(family1.surname)
-    fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
-    attach_file(pics[0], File.join(Rails.root, '/spec/fixtures/images/post_photo.jpg'))
-    attach_file(pics[1], File.join(Rails.root, '/spec/fixtures/images/avatar.png'))
-    fill_in "Picture Title", with: "Family Pic!"
-    click_button "Create Post"
-
-    expect(page).to have_content("Post created!")
-    expect(page).to have_xpath("//img[contains(@src, 'post_photo.jpg' )]")
-    expect(page).to have_xpath("//img[contains(@src, 'avatar.png' )]")
-    expect(page).to have_content("Family Pic!")
-  end
-
   scenario "with a video" do
     visit new_post_path
 
