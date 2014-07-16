@@ -19,18 +19,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def family_admin_for
-    fams = []
-    families.each do |family|
-      family.family_members.each do |membership|
-        if membership.user == self && membership.role == "admin"
-          fams << family
-        end
-      end
-    end
-    fams.sort_by { |fam| fam.surname }
-  end
-
   def deletable_comment?(comment)
     if comment.user == self
       return true
