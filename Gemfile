@@ -42,6 +42,7 @@ gem 'cocoon'
 group :production do
   gem 'unicorn'
   gem 'rails_12factor'
+  gem 'mandrill-api'
 end
 
 group :development, :test do
