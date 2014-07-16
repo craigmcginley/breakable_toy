@@ -16,8 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    # @comment = current_user.editable_comments.find(params[:id])
-    correct_user_or_admin(current_user)
+    @comment = current_user.comments.find(params[:id])
   end
 
   def update

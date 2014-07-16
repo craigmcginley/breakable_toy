@@ -8,6 +8,7 @@ feature "admin deletes a comment" do
   let!(:comment) { FactoryGirl.create(:comment, user: user, post: post) }
 
   before(:each) do
+    FactoryGirl.create(:family_post, family: family, post: post)
     FactoryGirl.create(:family_member, family: family, user: user, role: "member")
     FactoryGirl.create(:family_member, family: family, user: user2, role: "admin")
     sign_in_as(user2)

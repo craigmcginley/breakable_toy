@@ -31,6 +31,17 @@ class User < ActiveRecord::Base
     fams.sort_by { |fam| fam.surname }
   end
 
+  def deletable_comment?(comment)
+    family_members.each do |membership|
+      comment.post.families.each do |family|
+        if family == membership.family && membership.role == "admin"
+          return true
+        end
+      end
+    end
+    return false
+  end
+
   def admin_of?(family)
     family_members.each do |membership|
       if membership.family == family && membership.role == "admin"

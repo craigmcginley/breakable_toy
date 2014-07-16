@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe CommentsController, focus: true do
+describe CommentsController do
   let(:post) { FactoryGirl.create(:post_with_family) }
 
   describe "DELETE destroy" do

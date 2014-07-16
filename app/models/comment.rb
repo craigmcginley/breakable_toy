@@ -14,7 +14,6 @@ class Comment < ActiveRecord::Base
     else
       comment = Comment.find_by(id: id)
       admin_for.each do |member|
-        binding.pry
         if comment.user.families.include?(member.family)
           return comment
         end

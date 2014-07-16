@@ -7,6 +7,7 @@ feature "user deletes a comment" do
 
 
   before(:each) do
+    FactoryGirl.create(:family_post, family: family, post: post)
     FactoryGirl.create(:family_member, family: family, user: user, role: "member")
     sign_in_as(user)
   end
