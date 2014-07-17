@@ -1,7 +1,7 @@
 <h1><%= @family.surname %> Posts!</h1>
 
 <ul>
-  <% @family.posts.order("created_at DESC").each do |post| %>
+  <% @family.posts.order("event_date DESC").each do |post| %>
     <li>
       <h3><%= link_to post.title, post_path(post) %></h3>
       <div>
