@@ -22,7 +22,7 @@
           </div>
         <% end %>
         <div>
-          <% post.comments.order('created_at DESC').limit(3).each do |comment| %>
+          <% post.comments.order('created_at ASC').limit(3).each do |comment| %>
             <%= comment.user.first_name %>:
             <%= comment.body %><br>
           <% end %>

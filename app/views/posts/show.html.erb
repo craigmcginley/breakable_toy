@@ -29,7 +29,7 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
     <%= f.submit "Comment" %>
 <% end %>
 
-<% @post.comments.order('created_at DESC').each do |comment| %>
+<% @post.comments.order('created_at ASC').each do |comment| %>
   <div class="comment">
     <%= comment.user.first_name %>
     <p><%= comment.body %></p>

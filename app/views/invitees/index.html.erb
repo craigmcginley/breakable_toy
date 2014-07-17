@@ -29,6 +29,7 @@
       <li>
         <%= member.user.first_name %>
         <%= member.user.email %>
+        <%= member.role %>
         <% if member.role != "admin" %>
           <%= link_to "Promote", family_member_path(member), method: :patch, data: {confirm: "Are you sure?" } %>
           <%= link_to "Remove", family_member_path(member), method: :delete, data: {confirm: "Are you sure?" } %>
