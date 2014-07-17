@@ -17,4 +17,10 @@ describe Post do
     it { should have_valid(:body).when("This is a test body.", "We had so much fun the other day!" * 50) }
   end
 
+  describe "#event_date" do
+    it { should have_valid(:event_date).when("01/01/2000", Date.today ) }
+    it { should_not have_valid(:event_date).when("fadsjkh", "01/01/5000", "10102000", "01/012000", 01, nil, "") }
+  end
+
+
 end

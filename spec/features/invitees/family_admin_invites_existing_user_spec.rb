@@ -16,7 +16,7 @@ feature "user invites a current user to join family" do
   end
 
   scenario "who is not already a member" do
-    click_link "Manage Invites for #{family[:surname]} Family"
+    click_link "Manage"
 
     fill_in "Name", with: user2.first_name
     fill_in "Email", with: user2.email
@@ -38,7 +38,7 @@ feature "user invites a current user to join family" do
   scenario "who is already a member" do
     family1 = Family.where(surname: family[:surname]).first
     FactoryGirl.create(:family_member, family: family1, user: user2)
-    click_link "Manage Invites for #{family[:surname]} Family"
+    click_link "Manage"
     fill_in "Name", with: user2.first_name
     fill_in "Email", with: user2.email
     click_button "Invite"

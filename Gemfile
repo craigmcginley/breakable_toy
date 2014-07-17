@@ -39,6 +39,8 @@ gem 'youtube_addy'
 
 gem 'cocoon'
 
+gem 'validates_timeliness'
+
 group :production do
   gem 'unicorn'
   gem 'rails_12factor'
