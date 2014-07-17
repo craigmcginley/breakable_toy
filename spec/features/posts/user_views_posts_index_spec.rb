@@ -13,7 +13,7 @@ feature "user views index" do
       visit new_post_path
       check(family1.surname)
       fill_in "post_title", with: post[:title]
-      fill_in "Content", with: post[:body]
+      fill_in "post_body", with: post[:body]
       click_button "Create Post"
     end
   end

@@ -2,23 +2,22 @@
 
 <%= simple_form_for @post do |f| %>
 
-  <%= f.input :family_ids, :as => :check_boxes, label: "Which families would you like to share this post with?" do %>
+  <%= f.input :family_ids, required: true, :as => :check_boxes, label: "Which families would you like to share this post with?" do %>
     <%= f.collection_check_boxes :family_ids, current_user.families.order(:surname), :id, :surname do |b|
       b.label { b.check_box + b.text }
     end %>
   <% end %>
 
+  <%= f.input :title, required: true, label: false, placeholder: 'Post Title' %>
 
-  <%= f.input :event_date, as: :date, label: "Date",
+  <%= f.input :body, label: false, placeholder: 'What would you like to say?' %>
+
+
+  <%= f.input :event_date, as: :date, label: "When did the content for this post occur?",
                           start_year: Date.today.year - 200,
                           end_year: Date.today.year,
                           order: [:month, :day, :year] %>
 
-
-  <%= f.input :title %>
-
-
-  <%= f.input :body, label: 'Content' %>
   <div class="nested-fields">
     <%= f.simple_fields_for :post_images do |img_form| %>
       <%= render 'post_image_fields', f: img_form %>
@@ -29,9 +28,9 @@
 
   <%= f.simple_fields_for :post_videos do |vid_form| %>
 
-    <%= vid_form.input :set_url, as: :text, required: false, label: 'Link to YouTube Video' %>
+    <%= vid_form.input :set_url, as: :text, required: false, label: 'Add Link to YouTube Video (optional)' %>
 
-    <%= vid_form.input :title, label: 'Video Title' %>
+    <%= vid_form.input :title, label: false, placeholder: 'Video Title' %>
 
   <% end %>
 

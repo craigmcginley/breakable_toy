@@ -25,7 +25,7 @@ By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
 
 <h4>Comment</h4>
 <%= simple_form_for [@post, @comment] do |f| %>
-    <%= f.input :body, label: nil %>
+    <%= f.input :body, label: nil, placeholder: "Comment on this post." %>
     <%= f.submit "Comment" %>
 <% end %>
 
