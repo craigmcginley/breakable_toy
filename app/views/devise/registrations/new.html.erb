@@ -1,10 +1,10 @@
 <div class="small-7 small-left columns">
-  <h1>kinstagram</h1>
+  <%= image_tag "logo.png" %>
   <p>Track your family timeline by sharing family photos, videos, and updates privately with only the closest loved ones in your life.</p>
+  <%= image_tag "collage.png" %>
 </div>
-
 <div class="small-4 small-right columns border">
-  <h2>Sign up</h2>
+  <h3>Sign up</h3>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>

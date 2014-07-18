@@ -8,8 +8,8 @@ feature "user signs in" do
     visit unauthenticated_root_path
     click_link "Sign In"
 
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
+    fill_in "sign-in-user-email", with: user.email
+    fill_in "sign-in-user-password", with: user.password
     click_button "Sign In"
 
     expect(page).to have_content "You have signed in."

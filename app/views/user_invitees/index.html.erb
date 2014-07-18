@@ -1,4 +1,4 @@
-<div class="small-3 small-centered columns">
+<div class="small-4 small-centered columns">
   <h1>My Invites</h1>
 
   <table>
@@ -11,7 +11,7 @@
       <tr>
         <td><%= invite.family.surname %></td>
         <td><%= invite.status %></td>
-        <td>
+        <td width="125">
           <% if invite.status == "pending" %>
             <%= link_to "Accept", user_invitee_path(current_user, invite), method: :patch %> |
             <%= link_to "Decline", user_invitee_path(current_user, invite), method: :delete, data: {confirm: "Are you sure?" } %>

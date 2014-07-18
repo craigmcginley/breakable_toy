@@ -1,39 +1,73 @@
-<h1>Manage Invites and Members for <%= @family.surname %> Family</h1>
+<div class="large-5 large-centered columns">
+  <h3>Manage Invites and Members for <%= @family.surname %> Family</h3>
 
-<%= simple_form_for [@family, @invitee] do |f| %>
+  <%= simple_form_for [@family, @invitee] do |f| %>
 
-  <%= f.input :name %>
+    <%= f.input :name %>
 
-  <%= f.input :email %>
+    <%= f.input :email %>
 
-  <%= f.submit "Invite" %>
+    <%= f.submit "Invite", class: "button small radius right" %>
 
-<% end %>
-
-<h3>Invites</h3>
-<ul>
-  <% @invitees.each do |invitee| %>
-    <% if invitee.status == "pending" %>
-      <li>
-        <%= invitee.email %>
-        <%= invitee.status %>
-        <%= link_to "Remove", family_invitee_path(@family, invitee), method: :delete, data: {confirm: "Are you sure?" } %>
-      </li>
-    <% end %>
   <% end %>
-</ul>
 
-<h3>Members</h3>
-<ul>
-  <% @family.family_members.each do |member| %>
-      <li>
-        <%= member.user.first_name %>
-        <%= member.user.email %>
-        <%= member.role %>
-        <% if member.role != "admin" %>
-          <%= link_to "Promote", family_member_path(member), method: :patch, data: {confirm: "Are you sure?" } %>
-          <%= link_to "Remove", family_member_path(member), method: :delete, data: {confirm: "Are you sure?" } %>
+  <div class="pad-bottom">
+  </div>
+
+  <div class="row">
+    <h3>Invites</h3>
+    <table>
+      <tr>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Cancel Invite</th>
+      </tr>
+      <% @invitees.each do |invitee| %>
+        <tr>
+        <% if invitee.status == "pending" %>
+          <td>
+            <%= invitee.email %>
+          </td>
+          <td>
+            <%= invitee.status %>
+          </td>
+          <td>
+            <%= link_to "Remove", family_invitee_path(@family, invitee), method: :delete, data: {confirm: "Are you sure?" } %>
+          </td>
         <% end %>
-      </li>
-  <% end %>
-</ul>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="row">
+    <h3>Members</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+      <% @family.family_members.each do |member| %>
+        <tr>
+          <td>
+            <%= member.user.first_name %>
+          </td>
+          <td>
+            <%= member.user.email %>
+          </td>
+          <td>
+            <%= member.role %>
+          </td>
+          <td spancol="2">
+            <% if member.role != "admin" %>
+              <%= link_to "Promote", family_member_path(member), method: :patch, data: {confirm: "Are you sure?" } %> |
+              <%= link_to "Remove", family_member_path(member), method: :delete, data: {confirm: "Are you sure?" } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -8,10 +8,6 @@ body {
   font-size: .9rem;
 }
 
-.reveal-modal {
-  background-color: rgba(0,0,0,.8);
-}
-
 .post-index-header {
   margin-bottom: 15px;
 }
@@ -40,6 +36,7 @@ body {
 }
 
 .reveal-modal {
+  background-color: rgba(0, 0, 0, .8);
   position: fixed;
   top: 30%;
   left: 60%;
@@ -50,6 +47,20 @@ body {
   -moz-border-radius:    500px;
   -webkit-border-radius: 500px;
   border-radius:         500px;
+}
+
+.notice {
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 100, 220, .8);
+  border-radius: 500px;
+}
+
+.alert {
+  text-align: center;
+  color: yellow;
+  background-color: rgba(220, 0, 0, .8);
+  border-radius: 500px;
 }
 
 .comment-user {
@@ -67,6 +78,17 @@ body {
 }
 
 .home-images {
-  margin-right: 5px;
-  margin-bottom: 5px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.sign-in {
+  width: 450px;
+  top: 30%;
+  left: 72%;
+  background-color: white;
+}
+
+.pad-bottom {
+  padding-bottom: 50px;
 }

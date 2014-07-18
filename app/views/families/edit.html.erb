@@ -1,9 +1,11 @@
-<h1>Edit <%= @family.surname %> Family</h1>
+<div class="small-5 small-centered columns">
+  <h1>Edit <%= @family.surname %> Family</h1>
 
-<%= simple_form_for @family do |f| %>
+  <%= simple_form_for @family do |f| %>
 
-  <%= f.input :surname %>
+    <%= f.input :surname %>
 
-  <%= f.submit %>
+    <%= f.submit class: "button small radius right" %>
 
-<% end %>
+  <% end %>
+</div>

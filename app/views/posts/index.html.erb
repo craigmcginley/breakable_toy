@@ -1,8 +1,8 @@
 <div class="large-6 large-centered columns">
-  <% if !current_user %>
-    <p>Sign in or Sign up to get started!</p>
-  <% else %>
-    <table>
+  <table>
+    <% if @posts.empty? %>
+      <h2>No posts yet. Add one!</h2>
+    <% else %>
       <% @posts.each do |post| %>
         <tr>
           <td width="600">
@@ -27,22 +27,24 @@
                 <%= link_to (image_tag img.url.thumb), post_path(post) %>
               <% end %>
             </div>
-            <table>
-              <% post.comments.order('created_at ASC').limit(3).each do |comment| %>
-                <tr>
-                  <td>
-                    <%= image_tag comment.user.avatar.thumb, size: "30", class: "round" %>
-                    <%= comment.user.first_name %>
-                  </td>
-                  <td>
-                    <%= comment.body %>
-                  </td>
-                </tr>
-              <% end %>
-            </table>
+            <div class="small-10 small-centered columns">
+              <table>
+                <% post.comments.order('created_at ASC').limit(3).each do |comment| %>
+                  <tr>
+                    <td>
+                      <%= image_tag comment.user.avatar.thumb, size: "30", class: "round" %>
+                      <%= comment.user.first_name %>
+                    </td>
+                    <td>
+                      <%= comment.body %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
           </td>
         </tr>
       <% end %>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
 </div>
