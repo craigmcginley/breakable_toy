@@ -8,13 +8,13 @@
     <% if current_user.admin_of?(fam) %>
       <ul>
         <li>
-          <%= link_to "Manage Invites for #{fam.surname} Family", family_invitees_path(fam) %>
+          <%= link_to "Manage", family_invitees_path(fam) %>
         </li>
         <li>
-          <%= link_to "Edit #{fam.surname} Family", edit_family_path(fam) %>
+          <%= link_to "Edit", edit_family_path(fam) %>
         </li>
         <li>
-          <%= link_to "Delete #{fam.surname} Family", family_path(fam), method: :delete, data: {confirm: "Are you sure?" } %>
+          <%= link_to "Delete", family_path(fam), method: :delete, data: {confirm: "Are you sure?" } %>
         </li>
       </ul>
     <% end %>

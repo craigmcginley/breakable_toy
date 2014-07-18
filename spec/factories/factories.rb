@@ -12,7 +12,7 @@ FactoryGirl.define do
     user
     sequence(:title) { |i| "Family Update #{i}"}
     body "Hey everyone! Just wanted to send along an update for this event. Check out this picture!"
-
+    event_date "01/01/2000"
     factory :post_with_family do
       after(:build) do |post|
         post.families << FactoryGirl.create(:family)

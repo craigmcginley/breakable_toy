@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>kinstagram</title>
-
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -16,39 +16,79 @@
     <nav class="top-bar" data-topbar>
       <section class="top-bar-section">
         <ul>
+          <li>
+            <%= link_to (image_tag "nav-logo.png", size: "125"),
+              if current_user
+                posts_path
+              else
+                new_user_registration_path
+              end
+            %>
+          </li>
           <% if user_signed_in? %>
-            <li>
-              <%= link_to "My Families", families_path %>
-            </li>
-            <li>
-              <%= link_to "Create a Family", new_family_path %>
-            </li>
-            <li>
-              <%= link_to "All Posts", posts_path %>
-            </li>
-            <li>
-              <%= link_to "Add a Post", new_post_path %>
-            </li>
-            <li>
-              <%= link_to "My Invites", user_invitees_path(current_user) %>
-            </li>
-            <li class="right">
-              <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-            </li>
-            <li class="right">
-              <%= link_to edit_user_registration_path do %>
-                Signed in as <%= current_user.first_name %>
-                <%= image_tag current_user.avatar.thumb, size: "30" %>
-              <% end %>
-            </li>
-          <% else %>
-            <li class="right">
-              <%= link_to "Sign Up", new_user_registration_path %>
-            </li>
-            <li class="right">
-              <%= link_to "Sign In", new_user_session_path %>
-            </li>
-          <% end %>
+            <ul>
+              <li class="has-dropdown family-actions">
+                <%= link_to "My Families", '#' %>
+                <ul class="dropdown">
+                  <% current_user.families.each do |fam| %>
+                    <% if current_user.admin_of?(fam) %>
+                      <li class="has-dropdown">
+                        <%= link_to fam.surname, family_path(fam) %>
+                        <ul class="dropdown">
+                          <li>
+                            <%= link_to "Manage", family_invitees_path(fam) %>
+                          </li>
+                          <li>
+                            <%= link_to "Edit", edit_family_path(fam) %>
+                          </li>
+                          <li>
+                            <%= link_to "Delete", family_path(fam), method: :delete, data: {confirm: "Are you sure?" } %>
+                          </li>
+                        </ul>
+                      </li>
+                    <% else %>
+                      <li>
+                        <%= link_to fam.surname, family_path(fam) %>
+                      </li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <li>
+                <%= link_to "Create a Family", new_family_path %>
+              </li>
+              <li>
+                <%= link_to "All Posts", posts_path %>
+              </li>
+              <li>
+                <%= link_to "Add a Post", new_post_path %>
+              </li>
+              <li>
+                <%= link_to "My Invites", user_invitees_path(current_user) %>
+              </li>
+            </ul>
+            <ul class="right">
+              <li>
+                <%= link_to edit_user_registration_path do %>
+                  Signed in as <%= current_user.first_name %>
+                  <%= image_tag current_user.avatar.thumb, size: "30", class: "round" %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <ul class="right">
+                <li>
+                    <%= link_to "Sign In", '#',
+                    data: { :'reveal-id' => "signInModal"} %>
+                </li>
+                <li>
+                  <%= link_to "Sign Up", new_user_registration_path %>
+                </li>
+              </ul>
+            <% end %>
+          </ul>
         </ul>
       </section>
     </nav>
@@ -56,6 +96,12 @@
     <p class="alert"><%= alert %></p>
 
     <%= yield %>
+
+    <div id="signInModal" class="reveal-modal sign-in" data-reveal>
+      <%= render "devise/sessions/new", resource: User.new %>
+      <a class="close-reveal-modal">&#215;</a>
+      </div>
+    </div>
 
   </body>
 </html>

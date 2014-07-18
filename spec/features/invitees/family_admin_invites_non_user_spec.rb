@@ -15,11 +15,14 @@ feature "user invites a non-user to join site/family" do
   end
 
   scenario "with valid info" do
-    click_link "Manage Invites for #{family.surname} Family"
-
-    fill_in "Name", with: "Craig"
-    fill_in "Email", with: "craig@example.com"
-    click_button "Invite"
+    within(".family-actions") do
+      click_link "Manage"
+    end
+    within(".invite-form") do
+      fill_in "Name", with: "Craig"
+      fill_in "Email", with: "craig@example.com"
+      click_button "Invite"
+    end
 
     expect(Invitee.count).to eq(1)
     expect(page).to have_content("Successfully Invited!")
@@ -35,8 +38,12 @@ feature "user invites a non-user to join site/family" do
   end
 
   scenario "without any info" do
-    click_link "Manage Invites for #{family.surname} Family"
-    click_button "Invite"
+    within(".family-actions") do
+      click_link "Manage"
+    end
+    within(".invite-form") do
+      click_button "Invite"
+    end
 
 
 
@@ -48,14 +55,20 @@ feature "user invites a non-user to join site/family" do
 
   scenario "with someone who has already been invited" do
     invitee = FactoryGirl.attributes_for(:invitee)
-    click_link "Manage Invites for #{family.surname} Family"
-    fill_in "Name", with: invitee[:name]
-    fill_in "Email", with: invitee[:email]
-    click_button "Invite"
+    within(".family-actions") do
+      click_link "Manage"
+    end
+    within(".invite-form") do
+      fill_in "Name", with: invitee[:name]
+      fill_in "Email", with: invitee[:email]
+      click_button "Invite"
+    end
 
-    fill_in "Name", with: invitee[:name]
-    fill_in "Email", with: invitee[:email]
-    click_button "Invite"
+    within(".invite-form") do
+      fill_in "Name", with: invitee[:name]
+      fill_in "Email", with: invitee[:email]
+      click_button "Invite"
+    end
 
     expect(Invitee.count).to eq(1)
     expect(page).to have_content("This invite already exists.")

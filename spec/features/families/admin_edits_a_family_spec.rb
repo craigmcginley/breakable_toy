@@ -12,7 +12,7 @@ feature "user edits a family" do
   scenario "with valid info" do
     click_link "My Families"
 
-    click_link "Edit #{family.surname} Family"
+    click_link "Edit"
 
     fill_in "Surname", with: "McGinley"
     click_button "Update Family"
@@ -24,7 +24,7 @@ feature "user edits a family" do
   scenario "with invalid info" do
     click_link "My Families"
 
-    click_link "Edit #{family.surname} Family"
+    click_link "Edit"
 
     fill_in "Surname", with: ""
     click_button "Update Family"

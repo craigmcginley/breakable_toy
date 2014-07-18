@@ -1,43 +1,74 @@
-<h1><%= @post.title %></h1>
-By: <%= image_tag @post.user.avatar.thumb %> <%= @post.user.first_name %>
-<% if @post.user == current_user %>
-  <div>
-    <%= link_to "Edit", edit_post_path(@post) %>
+<div class="row">
+  <div class="small-8 columns post">
+    <span class="post-title"><%= @post.title %></span>
+    <span class="post-show-poster right"><%= image_tag @post.user.avatar.thumb, class: "round" %> <%= @post.user.first_name %></span>
+    <% if @post.user == current_user %>
+      <div>
+        <%= link_to "Edit", edit_post_path(@post) %>
+      </div>
+    <% end %>
+    <div>
+      <p class="post-body"><%= @post.body %></p>
+    </div>
+
+    <div class="post-assets">
+      <% @post.post_images.each do |img| %>
+        <a href="#" data-reveal-id="picsModal">
+          <%= image_tag img.url.thumb %>
+        </a>
+      <% end %>
+    </div>
+
+    <div class="post-assets">
+      <% @post.post_videos.each do |vid| %>
+        <%= vid.title %>
+        <div>
+          <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-<div>
-  <p><%= @post.body %></p>
+  <div class="small-4 columns">
+      <table>
+        <% @post.comments.order('created_at ASC').each do |comment| %>
+          <tr>
+            <td class="comment-user">
+              <%= image_tag comment.user.avatar.thumb, size: "35", class: "round" %>
+              <%= comment.user.first_name %>
+              <% if comment.user == current_user %>
+                <%= link_to "Edit", edit_comment_path(comment) %>
+              <% end %>
+              <% if current_user.deletable_comment?(comment) %>
+              <span class="delete-comment">
+                <%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure?" } %>
+              </span>
+              <% end %>
+            </td>
+            <td>
+              <p><%= comment.body %></p>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="2">
+            <%= simple_form_for [@post, @comment] do |f| %>
+              <%= f.input_field :body, label: false, placeholder: "Comment on this post.", class: "left" %>
+              <%= f.submit "Comment", class: "right" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+  </div>
 </div>
 
-<% @post.post_images.each do |img| %>
-  <div>
-    <%= img.title %>
-    <%= image_tag img.url %>
-  </div>
-<% end %>
-
-<% @post.post_videos.each do |vid| %>
-  <div>
-    <%= vid.title %>
-    <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
-  </div>
-<% end %>
-
-<h4>Comment</h4>
-<%= simple_form_for [@post, @comment] do |f| %>
-    <%= f.input :body, label: nil %>
-    <%= f.submit "Comment" %>
-<% end %>
-
-<% @post.comments.order('created_at DESC').each do |comment| %>
-  <div class="comment">
-    <%= comment.user.first_name %>
-    <p><%= comment.body %></p>
-    <% if comment.user == current_user %>
-      <%= link_to "Edit", edit_comment_path(comment) %>
-    <% end %>
-    <% if current_user.deletable_comment?(comment) %>
-      <%= link_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure?" } %>
+<div id="picsModal" class="reveal-modal" data-reveal>
+  <div class="slick">
+    <% @post.post_images.each do |img| %>
+      <div class="image-display">
+        <%= img.title %>
+        <%= image_tag img.url %>
+      </div>
     <% end %>
   </div>
-<% end %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

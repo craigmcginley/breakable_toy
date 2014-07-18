@@ -7,13 +7,15 @@ feature "user signs up" do
 
     click_link "Sign Up"
 
-    fill_in "user_first_name", with: "Craig"
-    fill_in "user_last_name", with: "McGinley"
-    fill_in "Email", with: "craig@example.com"
-    fill_in "Password", with: "password123"
-    fill_in "Password confirmation", with: "password123"
-    attach_file('user_avatar', File.join(Rails.root, '/spec/fixtures/images/avatar.png'))
-    click_button "Sign Up"
+    within(".sign-up-form") do
+      fill_in "user_first_name", with: "Craig"
+      fill_in "user_last_name", with: "McGinley"
+      fill_in "Email", with: "craig@example.com"
+      fill_in "Password", with: "password123"
+      fill_in "Password confirmation", with: "password123"
+      attach_file('user_avatar', File.join(Rails.root, '/spec/fixtures/images/avatar.png'))
+      click_button "Sign Up"
+    end
 
     expect(User.count).to eq(1)
     expect(page).to have_content "Welcome to the Fami.ly!"

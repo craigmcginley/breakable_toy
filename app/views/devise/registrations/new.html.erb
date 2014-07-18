@@ -1,42 +1,45 @@
-<h1>kinstagram</h1>
-<p>Track your family timeline by sharing family photos, videos, and updates privately with only the closest loved ones in your life.</p>
+<div class="small-7 small-left columns">
+  <%= image_tag "logo.png" %>
+  <p>Track your family timeline by sharing family photos, videos, and updates privately with only the closest loved ones in your life.</p>
+  <%= image_tag "collage.png" %>
+</div>
+<div class="small-4 small-right columns border sign-up-form">
+  <h3>Sign up</h3>
 
-<h2>Sign up</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <div>
+      <%= f.label 'First Name' %><br />
+      <%= f.text_field :first_name, autofocus: true %>
+    </div>
 
-  <div>
-    <%= f.label 'First Name' %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+    <div>
+      <%= f.label 'Last Name' %><br />
+      <%= f.text_field :last_name %>
+    </div>
 
-  <div>
-    <%= f.label 'Last Name' %><br />
-    <%= f.text_field :last_name %>
-  </div>
+    <div>
+      <%= f.label :email %><br />
+      <%= f.email_field :email %>
+    </div>
 
-  <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
+    <div>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-  <div>
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
 
-  <div>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div>
+      <%= f.label 'Profile Picture' %><br />
+      <%= f.file_field :avatar %>
+    </div>
 
-  <div>
-    <%= f.label 'Profile Picture' %><br />
-    <%= f.file_field :avatar %>
-  </div>
+    <div><%= f.submit "Sign Up", class: "button small radius right" %></div>
+  <% end %>
 
-  <div><%= f.submit "Sign Up" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

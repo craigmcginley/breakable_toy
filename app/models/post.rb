@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :post_videos, reject_if: :all_blank
 
   validates :user, presence: true
+  validates :event_date, presence: true, timeliness: { on_or_before: lambda { Date.current }, type: :date }
   validates :title, presence: true, length: {minimum: 2, maximum: 255}
 
   validate :belongs_to_at_least_one_family

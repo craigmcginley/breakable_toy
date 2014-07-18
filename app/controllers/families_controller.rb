@@ -17,7 +17,7 @@ class FamiliesController < ApplicationController
 
     if @family.save
       flash[:notice] = "Created your family!"
-      redirect_to families_path
+      redirect_to family_path(@family)
     else
       flash.now[:notice] = "Please check the requirements."
       render :new
@@ -27,7 +27,7 @@ class FamiliesController < ApplicationController
   def update
     if @family.update(family_params)
       flash[:notice] = "Successfully updated."
-      redirect_to families_path
+      redirect_to family_path(@family)
     else
       flash.now[:notice] = "Please check the requirements."
       render :edit
@@ -37,7 +37,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     flash[:notice] = "Family deleted."
-    redirect_to families_path
+    redirect_to authenticated_root_path
   end
 
   private

@@ -19,7 +19,7 @@ feature "user adds a post" do
 
     check(family1.surname)
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
+    fill_in "post_body", with: post[:body]
     click_button "Create Post"
 
     expect(Post.count).to eq(1)
@@ -44,8 +44,8 @@ feature "user adds a post" do
 
     check(family1.surname)
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
-    attach_file('Picture', File.join(Rails.root, '/spec/fixtures/images/post_photo.jpg'))
+    fill_in "post_body", with: post[:body]
+    attach_file('post_post_images_attributes_0_url', File.join(Rails.root, '/spec/fixtures/images/post_photo.jpg'))
     fill_in "Picture Title", with: "Family Pic!"
     click_button "Create Post"
 
@@ -59,8 +59,8 @@ feature "user adds a post" do
 
     check(family1.surname)
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
-    fill_in "Link to YouTube Video", with: "https://www.youtube.com/watch?v=5NV6Rdv1a3I"
+    fill_in "post_body", with: post[:body]
+    fill_in "post_post_videos_attributes_0_set_url", with: "https://www.youtube.com/watch?v=5NV6Rdv1a3I"
     fill_in "Video Title", with: "Recital"
     click_button "Create Post"
 
@@ -74,16 +74,14 @@ feature "user adds a post" do
 
     check(family1.surname)
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
+    fill_in "post_body", with: post[:body]
     click_button "Create Post"
 
-    visit families_path
     click_link family1.surname
 
     expect(page).to have_content(post[:title])
     expect(page).to have_content(post[:user].first_name)
 
-    visit families_path
     click_link family2.surname
 
     expect(page).to_not have_content(post[:title])
@@ -95,16 +93,14 @@ feature "user adds a post" do
     check(family1.surname)
     check(family2.surname)
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
+    fill_in "post_body", with: post[:body]
     click_button "Create Post"
 
-    visit families_path
     click_link family1.surname
 
     expect(page).to have_content(post[:title])
     expect(page).to have_content(post[:user].first_name)
 
-    visit families_path
     click_link family2.surname
 
     expect(page).to have_content(post[:title])
@@ -115,7 +111,7 @@ feature "user adds a post" do
     visit new_post_path
 
     fill_in "post_title", with: post[:title]
-    fill_in "Content", with: post[:body]
+    fill_in "post_body", with: post[:body]
     click_button "Create Post"
 
     expect(page).to_not have_content("Post created!")

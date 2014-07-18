@@ -12,7 +12,7 @@ feature "user deletes a family" do
   scenario "successfully" do
     click_link "My Families"
 
-    click_link "Delete #{family.surname} Family"
+    click_link "Delete"
 
     expect(page).to have_content("Family deleted.")
     expect(page).to_not have_content("family.surname")
