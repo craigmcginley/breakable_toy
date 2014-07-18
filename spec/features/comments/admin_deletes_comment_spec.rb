@@ -16,7 +16,9 @@ feature "admin deletes a comment" do
 
   scenario "successfully" do
     visit post_path(post)
-    click_link "Delete"
+    within(".delete-comment") do
+      click_link "Delete"
+    end
 
     expect(page).to have_content("Comment deleted.")
     expect(page).to_not have_content(comment.body)

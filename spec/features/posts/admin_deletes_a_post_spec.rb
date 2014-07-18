@@ -16,7 +16,9 @@ feature "admin deletes a post" do
 
   scenario "successfully" do
     visit posts_path
-    click_link "Delete"
+    within(".delete-post") do
+      click_link "Delete"
+    end
 
     expect(page).to have_content("Post deleted.")
     expect(page).to_not have_content(post.title)

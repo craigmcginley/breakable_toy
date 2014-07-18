@@ -13,7 +13,7 @@
               <span class="post-by right">
                 <%= image_tag post.user.avatar.thumb, size: "35", class: "round" %> <%= post.user.first_name %>
                 <% if current_user.deletable_post?(post) %>
-                  <div>
+                  <div class="delete-post">
                     <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?" } %>
                   </div>
                 <% end %>

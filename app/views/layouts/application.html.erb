@@ -27,7 +27,7 @@
           </li>
           <% if user_signed_in? %>
             <ul>
-              <li class="has-dropdown">
+              <li class="has-dropdown family-actions">
                 <%= link_to "My Families", '#' %>
                 <ul class="dropdown">
                   <% current_user.families.each do |fam| %>

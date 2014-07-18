@@ -13,10 +13,14 @@ feature "family admin removes invitee" do
 
     fill_in "Surname", with: family.surname
     click_button "Create Family"
-    click_link "Manage"
-    fill_in "Name", with: user2.first_name
-    fill_in "Email", with: user2.email
-    click_button "Invite"
+    within(".family-actions") do
+      click_link "Manage"
+    end
+    within(".invite-form") do
+      fill_in "Name", with: user2.first_name
+      fill_in "Email", with: user2.email
+      click_button "Invite"
+    end
   end
 
   scenario "successfully" do
