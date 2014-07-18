@@ -1,0 +1,72 @@
+body {
+  font-family: ubuntu;
+  background-color: #edf0f5;
+}
+
+.top-bar-section > ul > li > a {
+  font-family: ubuntu;
+  font-size: .9rem;
+}
+
+.reveal-modal {
+  background-color: rgba(0,0,0,.8);
+}
+
+.post-index-header {
+  margin-bottom: 15px;
+}
+
+.post {
+  padding: 10px;
+  border: 1px lightgrey solid;
+}
+
+.post-title {
+  font-size: 1.5rem;
+}
+
+.post-body {
+  margin: 15px;
+}
+
+.post-assets {
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+.image-display {
+  color: white;
+}
+
+.reveal-modal {
+  position: fixed;
+  top: 30%;
+  left: 60%;
+  max-width: 660px;
+}
+
+.round {
+  -moz-border-radius:    500px;
+  -webkit-border-radius: 500px;
+  border-radius:         500px;
+}
+
+.comment-user {
+  border-right: solid lightgrey 1px;
+}
+
+.center-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.border {
+  border: 1px solid black;
+  margin-right: 25px;
+}
+
+.home-images {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}

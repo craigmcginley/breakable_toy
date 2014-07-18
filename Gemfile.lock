@@ -239,6 +239,8 @@ GEM
     skinny (0.2.3)
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
+    slick_rails (1.3.6.3)
+      railties (>= 3.1)
     slop (3.5.0)
     spring (1.1.3)
     sprockets (2.11.0)
@@ -268,8 +270,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.2)
-      coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.1)
@@ -320,8 +320,8 @@ DEPENDENCIES
   shoulda
   shoulda-matchers
   simple_form
+  slick_rails
   spring
-  turbolinks
   uglifier (>= 1.3.0)
   unicorn
   valid_attribute

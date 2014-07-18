@@ -13,8 +13,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
-//= require_tree .
+//= require slick
 //= require cocoon
+//= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation();
+
+  $('.reveal-modal').on('opened', function() {
+    $(window).trigger('resize');
+  });
+
+  $('.slick').slick({
+    dots: true,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear'
+  });
+
+});
