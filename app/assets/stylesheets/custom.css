@@ -58,7 +58,7 @@ body {
 
 .alert {
   text-align: center;
-  color: yellow;
+  color: white;
   background-color: rgba(220, 0, 0, .8);
   border-radius: 500px;
 }
@@ -91,4 +91,12 @@ body {
 
 .pad-bottom {
   padding-bottom: 50px;
+}
+
+.sign-up-form {
+  margin-top: 15px;
+}
+
+.logo {
+  margin-top: 15px;
 }

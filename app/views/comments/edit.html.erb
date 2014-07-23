@@ -1,5 +1,7 @@
-<h4>Edit Comment</h4>
-<%= simple_form_for [@post, @comment] do |f| %>
-    <%= f.input :body, label: nil %>
-    <%= f.submit %>
-<% end %>
+<div class="small-4 small-offset-4 columns">
+  <h4>Edit Comment</h4>
+  <%= simple_form_for [@post, @comment] do |f| %>
+      <%= f.input :body, label: nil %>
+      <%= f.submit class: "button small radius right" %>
+  <% end %>
+</div>

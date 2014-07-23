@@ -53,7 +53,7 @@
           <td colspan="2">
             <%= simple_form_for [@post, @comment] do |f| %>
               <%= f.input_field :body, label: false, placeholder: "Comment on this post.", class: "left" %>
-              <%= f.submit "Comment", class: "right" %>
+              <%= f.submit "Comment", class: "button tiny radius right" %>
             <% end %>
           </td>
         </tr>
