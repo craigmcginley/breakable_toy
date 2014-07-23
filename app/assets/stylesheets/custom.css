@@ -3,7 +3,17 @@ body {
   background-color: #edf0f5;
 }
 
-.top-bar-section > ul > li > a {
+.top-bar-section > ul > ul > li > a {
+  font-family: ubuntu;
+  font-size: .9rem;
+}
+
+.family-actions > ul > li > a {
+  font-family: ubuntu;
+  font-size: .9rem;
+}
+
+.family-actions-sub > ul > li > a {
   font-family: ubuntu;
   font-size: .9rem;
 }
