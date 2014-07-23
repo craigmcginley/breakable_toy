@@ -1,51 +1,53 @@
-<h1>Edit Post</h1>
+<div class="small-6 small-offset-3 centered">
+  <h1>Edit Post</h1>
 
-<% @post.post_images.each do |img| %>
-  <div>
-    <%= img.title %>
-    <%= image_tag img.url %>
-    <%= link_to "Delete", post_image_path(img), method: :delete, data: {confirm: "Are you sure?" } %>
-  </div>
-<% end %>
-
-<% @post.post_videos.each do |vid| %>
-  <div>
-    <%= vid.title %>
-    <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
-  </div>
-  <%= link_to "Delete", post_video_path(vid), method: :delete, data: {confirm: "Are you sure?" } %>
-<% end %>
-
-<%= simple_form_for @post do |f| %>
-
-  <%= f.input :family_ids, :as => :check_boxes, label: "Which families would you like to share this post with?" do %>
-    <%= f.collection_check_boxes :family_ids, current_user.families.order(:surname), :id, :surname do |b|
-      b.label { b.check_box + b.text }
-    end %>
+  <% @post.post_images.each do |img| %>
+    <div>
+      <%= img.title %>
+      <%= image_tag img.url %>
+      <%= link_to "Delete", post_image_path(img), method: :delete, data: {confirm: "Are you sure?" } %>
+    </div>
   <% end %>
 
-  <%= f.input :title %>
+  <% @post.post_videos.each do |vid| %>
+    <div>
+      <%= vid.title %>
+      <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= vid.url %>" frameborder="0"></iframe>
+    </div>
+    <%= link_to "Delete", post_video_path(vid), method: :delete, data: {confirm: "Are you sure?" } %>
+  <% end %>
 
-  <%= f.input :body, label: 'Content' %>
+  <%= simple_form_for @post do |f| %>
 
-  <%= f.simple_fields_for :post_images do |img_form| %>
+    <%= f.input :family_ids, :as => :check_boxes, label: "Which families would you like to share this post with?" do %>
+      <%= f.collection_check_boxes :family_ids, current_user.families.order(:surname), :id, :surname do |b|
+        b.label { b.check_box + b.text }
+      end %>
+    <% end %>
 
-    <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
+    <%= f.input :title %>
 
-    <%= img_form.input :title, label: 'Picture Title' %>
+    <%= f.input :body, label: 'Content' %>
+
+    <%= f.simple_fields_for :post_images do |img_form| %>
+
+      <%= img_form.input :url, as: :file, required: false, label: 'Picture' %>
+
+      <%= img_form.input :title, label: 'Picture Title' %>
+
+    <% end %>
+
+    <%= f.simple_fields_for :post_videos do |vid_form| %>
+
+      <%= vid_form.input :set_url, as: :text, required: false, label: 'Link to YouTube Video' %>
+
+      <%= vid_form.input :title, label: 'Video Title' %>
+
+    <% end %>
+
+    <%= f.button :submit, class: "button small radius right" %>
 
   <% end %>
 
-  <%= f.simple_fields_for :post_videos do |vid_form| %>
-
-    <%= vid_form.input :set_url, as: :text, required: false, label: 'Link to YouTube Video' %>
-
-    <%= vid_form.input :title, label: 'Video Title' %>
-
-  <% end %>
-
-  <%= f.button :submit %>
-
-<% end %>
-
-<%= link_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure?" } %>
+  <%= link_to "Delete This Post", post_path(@post), method: :delete, data: {confirm: "Are you sure?" } %>
+</div>

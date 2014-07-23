@@ -1,50 +1,54 @@
-<div class="large-6 large-centered columns">
-  <table>
-    <% if @posts.empty? %>
-      <h2>No posts yet. Add one!</h2>
-    <% else %>
-      <% @posts.each do |post| %>
-        <tr>
-          <td width="600">
-            <div class="post-index-header">
-              <span class="post-title">
-                <%= link_to post.title, post_path(post) %>
-              </span>
-              <span class="post-by right">
-                <%= image_tag post.user.avatar.thumb, size: "35", class: "round" %> <%= post.user.first_name %>
-                <% if current_user.deletable_post?(post) %>
-                  <div class="delete-post">
-                    <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?" } %>
-                  </div>
-                <% end %>
-              </span>
-              <div class="post-date">
-                <%= post.event_date.strftime("%m/%d/%Y") %>
+<div class="small-6 small-offset-3 columns">
+  <% if current_user.families.empty? %>
+    <p>You need to <%= link_to "create", new_family_path %> or <%= link_to "join", user_invitees_path(current_user) %> a family group first.<p>
+  <% else %>
+    <table>
+      <% if @posts.empty? %>
+        <h2>No posts yet. Add one!</h2>
+      <% else %>
+        <% @posts.each do |post| %>
+          <tr>
+            <td width="600">
+              <div class="post-index-header">
+                <span class="post-title">
+                  <%= link_to post.title, post_path(post) %>
+                </span>
+                <span class="post-by right">
+                  <%= image_tag post.user.avatar.thumb, size: "35", class: "round" %> <%= post.user.first_name %>
+                  <% if current_user.deletable_post?(post) %>
+                    <div class="delete-post">
+                      <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Are you sure?" } %>
+                    </div>
+                  <% end %>
+                </span>
+                <div class="post-date">
+                  <%= post.event_date.strftime("%m/%d/%Y") %>
+                </div>
               </div>
-            </div>
-            <div class="post-assets">
-              <% post.post_images.limit(3).each do |img| %>
-                <%= link_to (image_tag img.url.thumb), post_path(post) %>
-              <% end %>
-            </div>
-            <div class="small-10 small-centered columns">
-              <table>
-                <% post.comments.order('created_at ASC').limit(3).each do |comment| %>
-                  <tr>
-                    <td>
-                      <%= image_tag comment.user.avatar.thumb, size: "30", class: "round" %>
-                      <%= comment.user.first_name %>
-                    </td>
-                    <td>
-                      <%= comment.body %>
-                    </td>
-                  </tr>
+              <div class="post-assets">
+                <% post.post_images.limit(3).each do |img| %>
+                  <%= link_to (image_tag img.url.thumb), post_path(post) %>
                 <% end %>
-              </table>
-            </div>
-          </td>
-        </tr>
+              </div>
+              <div class="small-10 small-centered columns">
+                <table>
+                  <% post.comments.order('created_at ASC').limit(3).each do |comment| %>
+                    <tr>
+                      <td>
+                        <%= image_tag comment.user.avatar.thumb, size: "30", class: "round" %>
+                        <%= comment.user.first_name %>
+                      </td>
+                      <td>
+                        <%= comment.body %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 </div>
