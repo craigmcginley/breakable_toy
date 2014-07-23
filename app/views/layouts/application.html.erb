@@ -40,7 +40,7 @@
                   <ul class="dropdown">
                     <% current_user.families.each do |fam| %>
                       <% if current_user.admin_of?(fam) %>
-                        <li class="has-dropdown">
+                        <li class="has-dropdown family-actions-sub">
                           <%= link_to fam.surname, family_path(fam) %>
                           <ul class="dropdown">
                             <li>
